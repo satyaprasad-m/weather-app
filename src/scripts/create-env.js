@@ -1,0 +1,2 @@
+const fs = require('fs');
+fs.writeFileSync('../.env', `REACT_APP_APIKEY=${process.env.REACT_APP_APIKEY}\nREACT_APP_API_URL=${process.env.REACT_APP_API_URL}\nREACT_APP_FORECAST_URL=${process.env.REACT_APP_FORECAST_URL}`);
