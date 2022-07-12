@@ -25,11 +25,13 @@ function App() {
     if(localStorage.latLong){ 
       setLatLong(JSON.parse(localStorage.latLong));
       const latLon = JSON.parse(localStorage.latLong);
+      console.log(latLon);
       getWeatherData(latLon);
     }else{
       navigator.geolocation.getCurrentPosition(position => {
       setLatLong({lat: position.coords.latitude, long: position.coords.longitude});
       localStorage.setItem('latLong', JSON.stringify(latLong));
+      console.log({lat: position.coords.latitude, long: position.coords.longitude});
     });
    }
   }
