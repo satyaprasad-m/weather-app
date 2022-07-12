@@ -6,34 +6,24 @@ function App() {
   const [foreCast, setForeCast] = useState([]);
 
   function getWeatherData(latLon){
-    console.log(latLon);
-    // fetch(process.env.REACT_APP_API_URL +`&lat=${latLon.lat}&lon=${latLon.long}`)
-    // .then(res=>res.json())
-    // .then(data=>setWeatherData(data.data[0]));
-    // getForeCast(latLon);
+    fetch(process.env.REACT_APP_API_URL +`&lat=${latLon.lat}&lon=${latLon.long}`)
+    .then(res=>res.json())
+    .then(data=>setWeatherData(data.data[0]));
+    getForeCast(latLon);
   }
   
   function getForeCast(latLon){
     const URL = process.env.REACT_APP_FORECAST_URL + `&lat=${latLon.lat}&lon=${latLon.long}`;
-    console.log(latLong);
-    // fetch(URL)
-    // .then(res=>res.json())
-    // .then(data=>setForeCast(data.data));
+    fetch(URL)
+    .then(res=>res.json())
+    .then(data=>setForeCast(data.data));
   }
 
   function getLatLong(){
-    if(localStorage.latLong){ 
-      setLatLong(JSON.parse(localStorage.latLong));
-      const latLon = JSON.parse(localStorage.latLong);
-      console.log(latLon);
-      getWeatherData(latLon);
-    }else{
       navigator.geolocation.getCurrentPosition(position => {
       setLatLong({lat: position.coords.latitude, long: position.coords.longitude});
-      localStorage.setItem('latLong', JSON.stringify(latLong));
-      console.log({lat: position.coords.latitude, long: position.coords.longitude});
+      getWeatherData({lat: position.coords.latitude, long: position.coords.longitude});
     });
-   }
   }
   useEffect(()=>{
     getLatLong();
