@@ -6,17 +6,19 @@ function App() {
   const [foreCast, setForeCast] = useState([]);
 
   function getWeatherData(latLon){
-    fetch(process.env.REACT_APP_API_URL +`&lat=${latLon.lat}&lon=${latLon.long}`)
-    .then(res=>res.json())
-    .then(data=>setWeatherData(data.data[0]));
-    getForeCast(latLon);
+    console.log(latLon);
+    // fetch(process.env.REACT_APP_API_URL +`&lat=${latLon.lat}&lon=${latLon.long}`)
+    // .then(res=>res.json())
+    // .then(data=>setWeatherData(data.data[0]));
+    // getForeCast(latLon);
   }
   
   function getForeCast(latLon){
     const URL = process.env.REACT_APP_FORECAST_URL + `&lat=${latLon.lat}&lon=${latLon.long}`;
-    fetch(URL)
-    .then(res=>res.json())
-    .then(data=>setForeCast(data.data));
+    console.log(latLong);
+    // fetch(URL)
+    // .then(res=>res.json())
+    // .then(data=>setForeCast(data.data));
   }
 
   function getLatLong(){
@@ -59,7 +61,7 @@ function App() {
               return <tr key={index}>
                 <td className="m-2 text-center">{item.datetime}</td>
                 <td className="m-2 text-center">{item.temp}</td>
-                <td className="flex flex-row justify-around m-2 md:text-center"><img alt={item?.weather.description} width="60" height="60" src={`https://www.weatherbit.io/static/img/icons/${item?.weather?.icon}.png`} /><div className="text-center">{item.weather.description}</div></td>
+                <td className="flex flex-row justify-around m-2 md:text-center text-ellipsis"><img alt={item?.weather.description} width="60" height="60" src={`https://www.weatherbit.io/static/img/icons/${item?.weather?.icon}.png`} /><div className="text-center">{item.weather.description}</div></td>
               </tr>
             })}
           </tbody>
